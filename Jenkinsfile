@@ -4,17 +4,17 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                bat 'docker build --no-cache -t vite-app
-                }
+                bat 'docker build --no-cache -t vite-app'
             }
-            stage('Deploy Container') {
-                steps {
-                    bat '''
-                    docker stop vite-container || echo container not running
-                    docker rm vite-container || echo container not found
-                    docker run -d -p 8881:80 --name vite-container vite-app
-                    '''
-                }
+        }
+        stage('Deploy Container') {
+            steps {
+                bat '''
+                docker stop vite-container || echo container not running
+                docker rm vite-container || echo container not found
+                docker run -d -p 8881:80 --name vite-container vite-app
+                '''
             }
         }
     }
+}
